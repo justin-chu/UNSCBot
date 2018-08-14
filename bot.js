@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-console.log(server.available);
+//console.log(server.available);
 // Channel ID
 const channel = client.guild.channels.find('username', 'music-fuckr-n');//"427198981379194890");
 console.log(channel);
