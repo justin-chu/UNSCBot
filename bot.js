@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+client.login(process.env.BOT_TOKEN)
+
 var channel;
 
 // Array of propaganda commissioned by the propaganda minister, Neodex
@@ -53,5 +55,3 @@ function propagandaMachine() {
 }
 
 setInterval(propagandaMachine, 60000);
-
-client.login(process.env.BOT_TOKEN)
