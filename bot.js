@@ -34,6 +34,7 @@ function propagandaMachine() {
 	currentHour = new Date().toLocaleTimeString('it-IT').substring(0,2);
 	min = new Date().toLocaleTimeString('it-IT').substring(3,5);
 		console.log('1');
+		console.log(currentHour + ',' + lastHour + ', ' + min);
 	if(currentHour >= 7 && currentHour <= 23 && min == 0) {
 		console.log('2');
 		if(currentHour == lastHour + 1) {
