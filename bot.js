@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // Channel ID
-const channel = client.channels.get("427198981379194890");
+const channel = client.channels.find('name', 'music-fuckr-n');//"427198981379194890");
 console.log(channel);
 
 // Array of propaganda commissioned by the propaganda minister, Neodex
@@ -18,6 +18,7 @@ var reduncancyFilter = new Array(2);
 
 // Client is ready to start working
 client.on('ready', () => {
+	console.log('Bot is ready');
 	lastHour = new Date().toLocaleTimeString('it-IT').substring(0,2) - 1;
 });
 
