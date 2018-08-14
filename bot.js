@@ -5,30 +5,19 @@ const client = new Discord.Client();
 const phrases = require('./phrases');
 const propaganda = phrases.phrases;
 
-var currentHour;
-var lastHour;
-
 // Previous two utterances
 var reduncancyFilter = new Array(2);
 
-function temp() {
-	lastHour = new Date().toLocaleTimeString('it-IT').substring(0,2) - 1;
-}
-
 // Client is ready to start working
 client.on('ready', () => {
-	lastHour = new Date().toLocaleTimeString('it-IT').substring(0,2) - 1;
+	console.log('Bot is ready');
 });
 
 // Spews propaganda every hour
-function propagandaMachine() {
-	currentHour = new Date().toLocaleTimeString('it-IT').substring(0,2);
-
-	if(currentHour >= 7 && currentHour <= 23) {
-		if(currentHour == lastHour + 1) {
-
-			lastHour = currentHour;
-
+client.on('message', function(message) {
+	if (message.content === "$loop") { 
+		var interval = setInterval (function () {
+			
 			var phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
 			while(reduncancyFilter.includes(phrase)){
 				phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
@@ -37,13 +26,11 @@ function propagandaMachine() {
 			reduncancyFilter[1] = reduncancyFilter[0];
 			reduncancyFilter[0] = phrase;
 
-			message.channel.send(phrase);
-
-		}
+			message.channel.send(phrase)
+			.catch(console.error);
+		}, 1 * 3600000); 
 	}
-}
-
-temp();
+});
 
 while(true) {
 	propagandaMachine();
