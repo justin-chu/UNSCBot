@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+
+// Specific server and channel
 var guild;
 var channel;
 
@@ -7,8 +9,8 @@ var channel;
 const phrases = require('./phrases');
 const propaganda = phrases.phrases;
 
+// Time based on 24-hour clocks
 var currentHour;
-var lastHour;
 var min;
 
 // Previous two utterances
@@ -18,6 +20,7 @@ var reduncancyFilter = new Array(2);
 client.on('ready', () => {
 	console.log('Bot is ready');
 
+	// Get guild and channel
 	var guilds = client.guilds;
 	guilds.forEach(function (g) {
 		console.log(g.name);
@@ -25,42 +28,34 @@ client.on('ready', () => {
 	});
 	channel = guild.channels.find('name', 'music-fuckr-n');
 	console.log(channel.name);
-
-	channel.send('test message');
-
-	lastHour = new Date().toLocaleTimeString('it-IT').substring(0,2) - 1;
 });
 
 // Spews propaganda every hour
 function propagandaMachine() {
 	currentHour = new Date().toLocaleTimeString('it-IT').substring(0,2);
 	min = new Date().toLocaleTimeString('it-IT').substring(3,5);
-		console.log('1');
-		console.log(currentHour + ',' + lastHour + ', ' + min);
+
+	// If the time is between 7AM and 11PM on the dot
 	if(currentHour >= 7 && currentHour <= 23 && min == 0) {
-		console.log('2');
-		if(currentHour == lastHour + 1) {
-		console.log('3');
 
-			lastHour = currentHour;
-
-			var phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
-			while(reduncancyFilter.includes(phrase)){
-				phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
-			}
-
-			reduncancyFilter[1] = reduncancyFilter[0];
-			reduncancyFilter[0] = phrase;
-
-			console.log(phrase);
-			channel.send(phrase);
-
+		// Get random, non-repetitive phrase
+		var phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
+		while(reduncancyFilter.includes(phrase)){
+			phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
 		}
+
+		// Add phrase to alrady-said array
+		reduncancyFilter[1] = reduncancyFilter[0];
+		reduncancyFilter[0] = phrase;
+
+		console.log(phrase);
+		channel.send(phrase);
+
 	}
 }
 
+// Call function every minute
 setInterval(propagandaMachine, 60000);
 
-		console.log('4');
-
+// Login with environmental bot token
 client.login(process.env.BOT_TOKEN)
