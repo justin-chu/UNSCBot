@@ -24,6 +24,7 @@ client.on('ready', () => {
 		guild = g;
 	});
 	channel = guild.channels.first();
+	console.log(channel.name);
 
 	lastHour = new Date().toLocaleTimeString('it-IT').substring(0,2) - 1;
 });
@@ -32,9 +33,11 @@ client.on('ready', () => {
 function propagandaMachine() {
 	currentHour = new Date().toLocaleTimeString('it-IT').substring(0,2);
 	min = new Date().toLocaleTimeString('it-IT').substring(3,5);
-
+		console.log('1');
 	if(currentHour >= 7 && currentHour <= 23 && min == 0) {
+		console.log('2');
 		if(currentHour == lastHour + 1) {
+		console.log('3');
 
 			lastHour = currentHour;
 
@@ -54,5 +57,7 @@ function propagandaMachine() {
 }
 
 setInterval(propagandaMachine, 60000);
+
+		console.log('4');
 
 client.login(process.env.BOT_TOKEN)
