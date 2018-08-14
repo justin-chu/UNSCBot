@@ -1,42 +1,53 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+// Channel ID
+const channel = client.channels.get("427198981379194890");
+console.log(channel);
+
 // Array of propaganda commissioned by the propaganda minister, Neodex
 const phrases = require('./phrases');
 const propaganda = phrases.phrases;
 
-// Current hour of the day
-const hour = new Date().toLocaleString('it-IT').substring(0,2);
+var currentHour;
+var lastHour;
+var min;
 
 // Previous two utterances
 var reduncancyFilter = new Array(2);
 
 // Client is ready to start working
 client.on('ready', () => {
-	console.log('Bot is ready');
+	lastHour = new Date().toLocaleTimeString('it-IT').substring(0,2) - 1;
 });
 
 // Spews propaganda every hour
-client.on('message', function(message) {
-	if (message.content === "$loop") { 
-		if(hour >= 7 && hour <= 23) {
-			var interval = setInterval (function () {
+function propagandaMachine() {
+	currentHour = new Date().toLocaleTimeString('it-IT').substring(0,2);
+	min = new Date().toLocaleTimeString('it-IT').substring(3,5);
 
-				var phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
-				while(reduncancyFilter.includes(phrase)){
-					phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
-				}
+	if(currentHour >= 7 && currentHour <= 23 && min == 0) {
+		if(currentHour == lastHour + 1) {
 
-				reduncancyFilter[1] = reduncancyFilter[0];
-				reduncancyFilter[0] = phrase;
+			lastHour = currentHour;
 
-				console.log(phrase);
+			var phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
+			while(reduncancyFilter.includes(phrase)){
+				phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
+			}
 
-				message.channel.send(phrase)
-				.catch(console.error);
-			}, 3600000); 
+			reduncancyFilter[1] = reduncancyFilter[0];
+			reduncancyFilter[0] = phrase;
+
+			console.log(phrase);
+			channel.send(phrase);
+
 		}
 	}
-});
+}
+
+while(true) {
+	propagandaMachine();
+}
 
 client.login(process.env.BOT_TOKEN)
