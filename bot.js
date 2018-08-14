@@ -23,7 +23,7 @@ client.on('ready', () => {
 		console.log(g.name);
 		guild = g;
 	});
-	channel = guild.channels[1];
+	channel = guild.channels.find('name', 'music-fuckr-n');
 	console.log(channel.name);
 
 	channel.send('test message');
