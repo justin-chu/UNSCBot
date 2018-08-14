@@ -1,11 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-// Specific servers and channels
+// Specific server and channel
 var guild;
 var channel;
-var UNSCguild;
-var UNSCchannel;
 
 // Array of propaganda commissioned by the propaganda minister, Neodex
 const phrases = require('./phrases');
@@ -22,18 +20,14 @@ var reduncancyFilter = new Array(2);
 client.on('ready', () => {
 	console.log('Bot is ready');
 
-	// Get guilds and channels
+	// Get guild and channel
 	var guilds = client.guilds;
-	guilds = guilds.array();
-
-	guilds[0] = guild;
-	channel = guild.channels.find('name', 'music-fuckr-n');
-
-	guilds[1] = UNSCguild;
-	UNSCchannel = UNSCguild.channels.find('name', 'United Nations Space Command');
-
-	console.log(UNSCguild.name);
-	console.log(UNSCchannel.name);
+	guilds.forEach(function (g) {
+		console.log(g.name);
+		guild = g;
+	});
+	channel = guild.channels.find('name', 'on-duty');
+	console.log(channel.name);
 });
 
 // Spews propaganda every hour
@@ -56,7 +50,6 @@ function propagandaMachine() {
 
 		console.log(phrase);
 		channel.send(phrase);
-		UNSCchannel.send(phrase);
 
 	}
 }
