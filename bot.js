@@ -1,11 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-const server = client.guilds.find('name', 'scumbags in paris');
-
 console.log(server.available);
 // Channel ID
-const channel = server.channels.find('name', 'music-fuckr-n');//"427198981379194890");
+const channel = client.guild.channels.find('username', 'music-fuckr-n');//"427198981379194890");
 console.log(channel);
 
 
