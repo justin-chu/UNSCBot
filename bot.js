@@ -17,7 +17,7 @@ var reduncancyFilter = new Array(2);
 client.on('ready', () => {
 	console.log('Bot is ready');
 
-	var guilds = clients.guilds;
+	var guilds = client.guilds;
     guilds.forEach(function (g) {
         console.log(g.name);
         guild = g;
