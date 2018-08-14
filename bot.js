@@ -17,7 +17,7 @@ client.on('ready', () => {
 client.on('message', function(message) {
 	if (message.content === "$loop") { 
 		var interval = setInterval (function () {
-			
+
 			var phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
 			while(reduncancyFilter.includes(phrase)){
 				phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
@@ -31,9 +31,5 @@ client.on('message', function(message) {
 		}, 1 * 3600000); 
 	}
 });
-
-while(true) {
-	propagandaMachine();
-}
 
 client.login(process.env.BOT_TOKEN)
