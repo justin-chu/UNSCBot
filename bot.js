@@ -23,8 +23,10 @@ client.on('ready', () => {
 		console.log(g.name);
 		guild = g;
 	});
-	channel = guild.channels.first();
+	channel = guild.channels[1];
 	console.log(channel.name);
+
+	channel.send('test message');
 
 	lastHour = new Date().toLocaleTimeString('it-IT').substring(0,2) - 1;
 });
