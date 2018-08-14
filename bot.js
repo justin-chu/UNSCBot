@@ -24,6 +24,8 @@ client.on('ready', () => {
 
 	// Get guilds and channels
 	var guilds = client.guilds;
+	guilds = guilds.array();
+
 	guilds[0] = guild;
 	channel = guild.channels.find('name', 'music-fuckr-n');
 
