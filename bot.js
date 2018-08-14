@@ -5,6 +5,9 @@ const client = new Discord.Client();
 const phrases = require('./phrases');
 const propaganda = phrases.phrases;
 
+// Current hour of the day
+const hour = new Date().toLocaleString('it-IT').substring(0,2);
+
 // Previous two utterances
 var reduncancyFilter = new Array(2);
 
@@ -16,19 +19,23 @@ client.on('ready', () => {
 // Spews propaganda every hour
 client.on('message', function(message) {
 	if (message.content === "$loop") { 
-		var interval = setInterval (function () {
+		if(hour >= 7 && hour <= 23) {
+			var interval = setInterval (function () {
 
-			var phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
-			while(reduncancyFilter.includes(phrase)){
-				phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
-			}
+				var phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
+				while(reduncancyFilter.includes(phrase)){
+					phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
+				}
 
-			reduncancyFilter[1] = reduncancyFilter[0];
-			reduncancyFilter[0] = phrase;
+				reduncancyFilter[1] = reduncancyFilter[0];
+				reduncancyFilter[0] = phrase;
 
-			message.channel.send(phrase)
-			.catch(console.error);
-		}, 1 * 3600000); 
+				console.log(phrase);
+
+				message.channel.send(phrase)
+				.catch(console.error);
+			}, 3600000); 
+		}
 	}
 });
 
