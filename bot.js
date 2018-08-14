@@ -1,11 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-
-//console.log(server.available);
-// Channel ID
-const channel = client.guild.channels.find('username', 'music-fuckr-n');//"427198981379194890");
-console.log(channel);
-
+var channel;
 
 // Array of propaganda commissioned by the propaganda minister, Neodex
 const phrases = require('./phrases');
@@ -21,6 +16,14 @@ var reduncancyFilter = new Array(2);
 // Client is ready to start working
 client.on('ready', () => {
 	console.log('Bot is ready');
+
+	var guilds = clients.guilds;
+    guilds.forEach(function (g) {
+        console.log(g.name);
+        guild = g;
+    });
+    channel = guild.channels.first();
+
 	lastHour = new Date().toLocaleTimeString('it-IT').substring(0,2) - 1;
 });
 
