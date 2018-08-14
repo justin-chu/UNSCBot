@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-client.login(process.env.BOT_TOKEN)
-
+var guild;
 var channel;
 
 // Array of propaganda commissioned by the propaganda minister, Neodex
@@ -32,7 +31,7 @@ client.on('ready', () => {
 // Spews propaganda every hour
 function propagandaMachine() {
 	currentHour = new Date().toLocaleTimeString('it-IT').substring(0,2);
-	min = new Date().toLocaleString('it-IT').substring(3,5);
+	min = new Date().toLocaleTimeString('it-IT').substring(3,5);
 
 	if(currentHour >= 7 && currentHour <= 23 && min == 0) {
 		if(currentHour == lastHour + 1) {
@@ -55,3 +54,5 @@ function propagandaMachine() {
 }
 
 setInterval(propagandaMachine, 60000);
+
+client.login(process.env.BOT_TOKEN)
