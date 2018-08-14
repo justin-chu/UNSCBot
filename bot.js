@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 // Channel ID
-const channel = client.channels.find('name', 'music-fuckr-n');//"427198981379194890");
+const channel = client.channels.find('channel', 'music-fuckr-n');//"427198981379194890");
 console.log(channel);
 
 // Array of propaganda commissioned by the propaganda minister, Neodex
