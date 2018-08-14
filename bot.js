@@ -25,6 +25,8 @@ client.on('ready', () => {
     channel = guild.channels.first();
 
 	lastHour = new Date().toLocaleTimeString('it-IT').substring(0,2) - 1;
+
+	propagandaMachine();
 });
 
 // Spews propaganda every hour
@@ -50,10 +52,11 @@ function propagandaMachine() {
 
 		}
 	}
-}
-
-while(true) {
 	propagandaMachine();
 }
+
+// while(true) {
+// 	propagandaMachine();
+// }
 
 client.login(process.env.BOT_TOKEN)
