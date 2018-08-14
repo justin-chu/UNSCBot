@@ -1,9 +1,11 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+console.log(guild.available);
 // Channel ID
-const channel = client.channels.find('channel', 'music-fuckr-n');//"427198981379194890");
+const channel = guild.channels.find('name', 'music-fuckr-n');//"427198981379194890");
 console.log(channel);
+
 
 // Array of propaganda commissioned by the propaganda minister, Neodex
 const phrases = require('./phrases');
