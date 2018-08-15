@@ -33,7 +33,7 @@ client.on('ready', () => {
 function propagandaMachine() {
 	currentHour = new Date().getUTCHours() - 4; // Convert GMT to EST
 	min = new Date().getUTCMinutes();	
-	console.log(`${currentHour}, ${min});
+	console.log(`${currentHour}, ${min}`);
 
 	// If the time is between 7AM and 11PM on the dot
 	if(currentHour >= 7 && currentHour <= 23 && min == 0) {
