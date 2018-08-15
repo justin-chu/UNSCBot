@@ -23,7 +23,6 @@ client.on('ready', () => {
 	// Get guild and channel
 	var guilds = client.guilds;
 	guilds.forEach(function (g) {
-		console.log(g.name);
 		guild = g;
 	});
 	channel = guild.channels.find('name', 'on-duty');
@@ -32,8 +31,8 @@ client.on('ready', () => {
 
 // Spews propaganda every hour
 function propagandaMachine() {
-	currentHour = new Date().toLocaleTimeString('it-IT').substring(0,2);
-	min = new Date().toLocaleTimeString('it-IT').substring(3,5);
+	currentHour = new Date().getUTCHours() - 4; // Convert GMT to EST
+	min = new Date().getUTCMinutes();
 
 	// If the time is between 7AM and 11PM on the dot
 	if(currentHour >= 7 && currentHour <= 23 && min == 0) {
