@@ -36,7 +36,7 @@ function propagandaMachine() {
 	console.log(`${currentHour}, ${min}`);
 
 	// If the time is between 7AM and 11PM on the dot
-	if((currentHour >= 11 && currentHour <= 23) || (currentHour >= 0 && currentHour <= 3) <= 23 && min == 0) {  // Between 7AM to 11PM EST
+	if(((currentHour >= 11 && currentHour <= 23) || (currentHour >= 0 && currentHour <= 3)) && min == 0) {  // Between 7AM to 11PM EST
 
 		// Get random, non-repetitive phrase
 		var phrase = propaganda[Math.floor(Math.random()*propaganda.length)];
