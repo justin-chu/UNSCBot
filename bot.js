@@ -29,6 +29,23 @@ client.on('ready', () => {
 	console.log(channel.name);
 });
 
+client.on('message', message => {
+    if(message.content.toLowerCase().substring(0, 8) === '!unscbot'){
+        message.reply('I am a propaganda bot commisioned by Admiral Neodex.');
+    }
+});
+
+client.on('message', message => {
+    if(message.content.toLowerCase().substring(0, 8) === 'solipsil') {
+        if(message.author.username === 'Neodex') {
+            message.reply('Aye aye admiral.');
+        }
+        else {
+            message.reply('Reporting for duty.');
+        }
+    }
+});
+
 // Spews propaganda every hour
 function propagandaMachine() {
 	currentHour = new Date().getUTCHours();
